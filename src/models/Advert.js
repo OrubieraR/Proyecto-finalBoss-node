@@ -1,24 +1,39 @@
-import mongoose from 'mongoose'
-import path from 'path'
-import fs from 'fs/promises'
+const mongoose = require("mongoose");
 
-const advertSchema = mongoose.Schema(
+const advertsSchema = mongoose.Schema(
   {
-    // esquema de la BD de ejemplo!!!
-
- /*    name: { type: String, index: true },
-    price: { type: Number, index: true },
-    sale: { type: Boolean, index: true },
+    name: String,
+    PGI: Number,
+    sale: Boolean,
+    price: Number,
     photo: String,
-    tags: { type: [String], index: true },
-     */
+    tags: [String],
+    description: String
   },
   {
-   /*  collection: 'Adverts', */
+    collection: "Advert",
   }
-)
+);
+advertsSchema.statics.filterList = async function (
+  filter,
+  skip,
+  limit,
+  select,
+  sort
+) {
+  
+  const query = Advert.find(filter)
+
+  query.skip(parseInt(skip))
+  query.limit(parseInt(limit))
+  query.select(select)
+  query.sort(sort)
+
+  return query.exec()
+}
+
 // Cargar json de anuncios
-advertSchema.statics.loadJSON = async function () {
+/* advertsSchema.statics.loadJSON = async function () {
   const file = path.join(__dirname, '../../initialAdverts.json')
   const data = await fs.readFile(file, { encoding: 'utf-8' })
 
@@ -28,8 +43,8 @@ advertSchema.statics.loadJSON = async function () {
   const insertedAdverts = await Advert.insertMany(adverts)
 
   return insertedAdverts
-}
+} */
 
-const Advert = mongoose.model('Advert', advertSchema)
+const Advert = mongoose.model('Advert', advertsSchema)
 
-export default Advert
+module.exports = Advert;

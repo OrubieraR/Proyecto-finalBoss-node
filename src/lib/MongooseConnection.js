@@ -1,7 +1,6 @@
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-
-dotenv.config()
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
 
 mongoose.connection.on('error', (error) => {
   console.log('Error durante el proceso de conexión:', error)
@@ -17,4 +16,4 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
   useUnifiedTopology: true,
 })
 
-export default mongoose.connection
+module.exports = mongoose.connection;
