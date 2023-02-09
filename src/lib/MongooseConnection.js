@@ -1,7 +1,6 @@
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-
-dotenv.config()
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
 
 mongoose.connection.on('error', (error) => {
   console.log('Error durante el proceso de conexión:', error)

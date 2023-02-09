@@ -1,5 +1,5 @@
-import 'regenerator-runtime/runtime'
-import connection from '../lib/MongooseConnection'
+
+import { connection } from '../lib/MongooseConnection'
 import { User, Advert } from '../models'
 
 const main = async () => {
