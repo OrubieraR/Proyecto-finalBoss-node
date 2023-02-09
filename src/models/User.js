@@ -1,13 +1,15 @@
-import bcrypt from 'bcrypt'
-import mongoose from 'mongoose'
+
+const bcrypt = require('bcrypt')
+const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema(
   {
+    name :{ type: String, unique: true },
     email: { type: String, unique: true },
     password: String,
   },
   {
-    collection: 'Users',
+    collection: 'User',
   }
 )
 
@@ -21,4 +23,4 @@ userSchema.methods.checkPwd = function (plainTextPwd) {
 
 const User = mongoose.model('User', userSchema)
 
-export default User
+module.exports = User;

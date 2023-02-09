@@ -16,4 +16,4 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
   useUnifiedTopology: true,
 })
 
-export default mongoose.connection
+module.exports = mongoose.connection;

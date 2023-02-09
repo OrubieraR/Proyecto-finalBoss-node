@@ -1,7 +1,4 @@
 { 
-  
-  "type": "module",
-  
   "scripts": {
     "dev": "nodemon src/app.js",
     "initDB": "node ./src/utils/initDB.js",
