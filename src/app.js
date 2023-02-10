@@ -1,9 +1,14 @@
 const express = require("express");
-const app = express();
+var app = express();
 const morgan = require("morgan");
 
+require("./lib/MongooseConnection");
+
+//RUTAS DEL API
+app.use("/api/adverts", require("./api/adverts"));
+
 //Configuraciones
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3005);
 app.set("json spaces", 2);
 
 //Middleware

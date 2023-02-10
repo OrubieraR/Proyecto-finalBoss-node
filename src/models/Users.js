@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const  bcrypt = requiere("bcrypt")
+const bcrypt = require("bcrypt");
 
 const signUpSchema = mongoose.Schema(
   {
@@ -13,13 +13,12 @@ const signUpSchema = mongoose.Schema(
 );
 
 signUpSchema.statics.hashPwd = function (plainTextPwd) {
-  return bcrypt.hash(plainTextPwd, 9)
-}
+  return bcrypt.hash(plainTextPwd, 9);
+};
 
 signUpSchema.methods.checkPwd = function (plainTextPwd) {
-  return bcrypt.compare(plainTextPwd, this.password)
-}
-
+  return bcrypt.compare(plainTextPwd, this.password);
+};
 
 signUpSchema.statics.list = function (filter, skip, limit, fields, sort) {
   const query = SignUp.find(filter);
