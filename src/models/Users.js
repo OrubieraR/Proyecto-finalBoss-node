@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const  bcrypt = requiere("bcrypt")
+const bcrypt = require("bcrypt")
 
 const signUpSchema = mongoose.Schema(
   {
