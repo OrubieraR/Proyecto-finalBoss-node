@@ -1,10 +1,8 @@
 const express = require("express");
 var app = express();
 const morgan = require("morgan");
-
-require("./lib/MongooseConnection");
-
 const cors = require("cors");
+require("./lib/MongooseConnection");
 
 app.use(cors());
 
@@ -12,7 +10,7 @@ app.use(cors());
 app.use("/api/adverts", require("./api/adverts"));
 
 //Configuraciones
-app.set("port", process.env.PORT || 3005);
+app.set("port", process.env.PORT || 3000);
 app.set("json spaces", 2);
 
 //Middleware
