@@ -1,5 +1,5 @@
 const express = require("express");
-var app = express();
+const app = express();
 const morgan = require("morgan");
 const LoginController = require("../controller/loginController");
 const register = require("./routes/register");
@@ -7,7 +7,7 @@ const cors = require("cors");
 require("./lib/MongooseConnection");
 
 //Configuraciones
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3001);
 app.set("json spaces", 2);
 
 //Middleware
