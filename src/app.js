@@ -1,13 +1,10 @@
 const express = require("express");
 var app = express();
 const morgan = require("morgan");
+const LoginController = require("../controller/loginController");
+const register = require("./routes/register");
 const cors = require("cors");
 require("./lib/MongooseConnection");
-
-app.use(cors());
-
-//RUTAS DEL API
-app.use("/api/adverts", require("./api/adverts"));
 
 //Configuraciones
 app.set("port", process.env.PORT || 3000);
@@ -15,15 +12,18 @@ app.set("json spaces", 2);
 
 //Middleware
 app.use(morgan("dev"));
-app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 app.use(express.json());
 
-//Nuestro primer WS Get
-app.get("/", (req, res) => {
-  res.json({
-    Title: "Hola mundo",
-  });
-});
+const loginController = new LoginController();
+// API Route
+app.use("/api/register", register);
+app.use("/api/login", loginController.post);
+app.use("/api/adverts", require("./api/adverts"));
+
+// app.get("/adverts", (req,res)=>{
+//   res.send(adverts)
+// })
 
 //Iniciando el servidor
 app.listen(app.get("port"), () => {
