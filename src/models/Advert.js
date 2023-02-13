@@ -3,17 +3,18 @@ const mongoose = require("mongoose");
 const advertsSchema = mongoose.Schema(
   {
     name: String,
-    PGI: Number,
+    company: String,
     sale: Boolean,
     price: Number,
     photo: String,
-    tags: [String],
-    description: String
+    category: [String],
+    description: String,
   },
   {
     collection: "Advert",
   }
 );
+
 advertsSchema.statics.filterList = async function (
   filter,
   skip,
@@ -21,16 +22,15 @@ advertsSchema.statics.filterList = async function (
   select,
   sort
 ) {
-  
-  const query = Advert.find(filter)
+  const query = Advert.find(filter);
 
-  query.skip(parseInt(skip))
-  query.limit(parseInt(limit))
-  query.select(select)
-  query.sort(sort)
+  query.skip(parseInt(skip));
+  query.limit(parseInt(limit));
+  query.select(select);
+  query.sort(sort);
 
-  return query.exec()
-}
+  return query.exec();
+};
 
 // Cargar json de anuncios
 /* advertsSchema.statics.loadJSON = async function () {
@@ -45,6 +45,6 @@ advertsSchema.statics.filterList = async function (
   return insertedAdverts
 } */
 
-const Advert = mongoose.model('Advert', advertsSchema)
+const Advert = mongoose.model("Advert", advertsSchema);
 
 module.exports = Advert;
