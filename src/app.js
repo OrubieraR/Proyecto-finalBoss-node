@@ -4,6 +4,10 @@ const morgan = require("morgan");
 
 require("./lib/MongooseConnection");
 
+const cors = require("cors");
+
+app.use(cors());
+
 //RUTAS DEL API
 app.use("/api/adverts", require("./api/adverts"));
 
