@@ -15,6 +15,7 @@ const advertsSchema = mongoose.Schema(
     collection: "Advert",
   }
 );
+
 advertsSchema.statics.filterList = async function (
   filter,
   skip,

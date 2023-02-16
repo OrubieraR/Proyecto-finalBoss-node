@@ -1,7 +1,6 @@
 const Advert = [
   {
     name: "BikeBans",
-    userOwner: "User1",
     PGI: 16,
     sale: true,
     price: 100.0,
@@ -11,7 +10,6 @@ const Advert = [
   },
   {
     name: "BikeBans",
-    userOwner: "User2",
     PGI: 16,
     sale: true,
     price: 100.0,
@@ -21,7 +19,6 @@ const Advert = [
   },
   {
     name: "BikeBans",
-    userOwner: "User1",
     PGI: 16,
     sale: true,
     price: 100.0,
@@ -30,5 +27,3 @@ const Advert = [
     description: "JUEGAAAZO",
   },
 ];
-
-module.exports = Advert;
