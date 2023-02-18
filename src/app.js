@@ -20,6 +20,7 @@ const loginController = new LoginController();
 app.use("/api/register", register);
 app.use("/api/login", loginController.post);
 app.use("/api/adverts", require("./api/adverts"));
+app.use("/api/newadvert", require("./api/newadvert"));
 
 // app.get("/adverts", (req,res)=>{
 //   res.send(adverts)
