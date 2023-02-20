@@ -5,6 +5,9 @@ const LoginController = require("../controller/loginController");
 const register = require("./routes/register");
 const cors = require("cors");
 require("./lib/MongooseConnection");
+const getUserProfile = require("../controller/userController");
+const protect = require("./middleware/authMiddleware");
+const router = require("./routes/register");
 
 //Configuraciones
 app.set("port", process.env.PORT || 3001);
@@ -20,6 +23,7 @@ const loginController = new LoginController();
 app.use("/api/register", register);
 app.use("/api/login", loginController.post);
 app.use("/api/adverts", require("./api/adverts"));
+router.route("/api/profile").get(protect, getUserProfile)
 
 // app.get("/adverts", (req,res)=>{
 //   res.send(adverts)
