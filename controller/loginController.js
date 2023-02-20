@@ -20,6 +20,10 @@ class LoginController {
         res.status(401)
         throw new Error('Wrong name or password')
       }
+
+      const token =genAuthToken(user._id)
+
+      return res.status(200).json({ token });
     } catch (err) {
       next(err);
     }
