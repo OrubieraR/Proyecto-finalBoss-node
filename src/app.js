@@ -5,6 +5,7 @@ const LoginController = require("../controller/loginController");
 const register = require("./routes/register");
 const cors = require("cors");
 require("./lib/MongooseConnection");
+const fileupload = require("express-fileupload");
 
 //Configuraciones
 app.set("port", process.env.PORT || 3001);
@@ -14,13 +15,16 @@ app.set("json spaces", 2);
 app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
+app.use(fileupload());
 
 const loginController = new LoginController();
 // API Route
 app.use("/api/register", register);
 app.use("/api/login", loginController.post);
 app.use("/api/adverts", require("./api/adverts"));
-app.use("/api/newadvert", require("./api/newadvert"));
+
+// Post create advert
+app.use("/api/adverts", require("./api/newadvert"));
 
 // app.get("/adverts", (req,res)=>{
 //   res.send(adverts)

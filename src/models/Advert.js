@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const advertsSchema = mongoose.Schema(
   {
     name: String,
+    userOwner: String,
     company: String,
     sale: Boolean,
     price: Number,
