@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-const LoginController = require("../controller/loginController");
+const login = require("./routes/login");
 const register = require("./routes/register");
 const cors = require("cors");
 require("./lib/MongooseConnection");
 const fileupload = require("express-fileupload");
+const adverts = require("../initialAdverts");
+const advertsResults = require("./routes/adverts");
 
 //Configuraciones
 app.set("port", process.env.PORT || 3001);
@@ -17,11 +19,10 @@ app.use(cors());
 app.use(express.json());
 app.use(fileupload());
 
-const loginController = new LoginController();
 // API Route
 app.use("/api/register", register);
-app.use("/api/login", loginController.post);
-app.use("/api/adverts", require("./api/adverts"));
+app.use("/api/login", login);
+app.use("/api/adverts", advertsResults);
 
 // Post create advert
 app.use("/api/adverts", require("./api/newadvert"));

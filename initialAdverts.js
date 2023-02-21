@@ -1,7 +1,8 @@
 const Advert = [
   {
     name: "Zelda",
-    company: "Nintendo",
+    userOwner: "User1",
+    PGI: 16,
     sale: true,
     price: 100.0,
     photo: "FFXV.png",
@@ -10,20 +11,22 @@ const Advert = [
   },
   {
     name: "FIFA",
-    company: "EA",
-    sale: false,
-    price: 50.0,
-    photo: "FFXV.png",
-    category: ["Sports"],
-    description: "JUEGAAAZO",
-  },
-  {
-    name: "Fortnite",
-    company: "Epic Games",
+    userOwner: "User2",
+    PGI: 16,
     sale: true,
     price: 100.0,
     photo: "FFXV.png",
-    category: ["Shooter", "RPG"],
+    category: ["Fantasy", "RPG"],
+    description: "JUEGAAAZO",
+  },
+  {
+    name: "BikeBans",
+    userOwner: "User1",
+    PGI: 16,
+    sale: true,
+    price: 100.0,
+    photo: "FFXV.png",
+    category: ["Fantasy", "RPG"],
     description: "JUEGAAAZO",
   },
 ];
