@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-const login = require("./routes/login")
+const login = require("./routes/login");
 const register = require("./routes/register");
 const cors = require("cors");
 require("./lib/MongooseConnection");
 const adverts = require("../initialAdverts");
+const advertsResults = require("./routes/adverts");
 
 //Configuraciones
 app.set("port", process.env.PORT || 3001);
@@ -19,7 +20,7 @@ app.use(express.json());
 // API Route
 app.use("/api/register", register);
 app.use("/api/login", login);
-app.use("/api/adverts", require("./api/adverts"));
+app.use("/api/adverts", advertsResults);
 
 //Iniciando el servidor
 app.listen(app.get("port"), () => {
