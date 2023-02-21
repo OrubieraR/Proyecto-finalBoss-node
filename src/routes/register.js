@@ -24,15 +24,16 @@ router.post("/", async (req, res) => {
     email: req.body.email,
     password: req.body.password,
   });
-  //hasheamos la pass
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt);
+  //hasheamos la passS
+  const salt = await bcrypt.genSalt(9);
+ user.password = await bcrypt.hash(user.password, salt);
+
 
   user = await user.save();
 
   const token = genAuthToken(user);
 
-  res.send(token);
+  res.status(200).json({ token });
 });
 
 module.exports = router;

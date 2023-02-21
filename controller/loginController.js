@@ -1,6 +1,7 @@
 "use strict";
 const jwt = require("jsonwebtoken");
 const { User } = require("../src/models");
+const genAuthToken = require("../src/utils/genAuthToken");
 
 class LoginController {
   async post(req, res, next) {
@@ -15,9 +16,7 @@ class LoginController {
         return res.status(status).json({ message });
       }
 
-      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY, {
-        expiresIn: "2d",
-      });
+      const token = genAuthToken(user)
 
       return res.status(200).json({ token });
     } catch (err) {
