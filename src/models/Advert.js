@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const advertsSchema = mongoose.Schema(
   {
     name: String,
-    company: String,
+    userOwner: String,
+    PGI: Number,
     sale: Boolean,
     price: Number,
     photo: String,
