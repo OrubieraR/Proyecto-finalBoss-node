@@ -5,6 +5,7 @@ const login = require("./routes/login")
 const register = require("./routes/register");
 const cors = require("cors");
 require("./lib/MongooseConnection");
+const adverts = require("../initialAdverts");
 
 //Configuraciones
 app.set("port", process.env.PORT || 3001);
@@ -19,10 +20,6 @@ app.use(express.json());
 app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/adverts", require("./api/adverts"));
-
-// app.get("/adverts", (req,res)=>{
-//   res.send(adverts)
-// })
 
 //Iniciando el servidor
 app.listen(app.get("port"), () => {

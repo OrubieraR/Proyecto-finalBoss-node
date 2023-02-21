@@ -5,7 +5,6 @@ const advertsSchema = mongoose.Schema(
     name: String,
     userOwner: String,
     PGI: Number,
-    company: String,
     sale: Boolean,
     price: Number,
     photo: String,
@@ -38,12 +37,9 @@ advertsSchema.statics.filterList = async function (
 /* advertsSchema.statics.loadJSON = async function () {
   const file = path.join(__dirname, '../../initialAdverts.json')
   const data = await fs.readFile(file, { encoding: 'utf-8' })
-
   if (!data) throw new Error(`${file} está vacío!`)
-
   const adverts = JSON.parse(data).adverts
   const insertedAdverts = await Advert.insertMany(adverts)
-
   return insertedAdverts
 } */
 
