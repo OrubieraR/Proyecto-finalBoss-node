@@ -33,6 +33,12 @@ advertsSchema.statics.filterList = async function (
   return query.exec();
 };
 
+advertsSchema.statics.getUniqueAdvert = async function (advertID) {
+  const advert = Advert.findOne({ _id: advertID });
+
+  return advert.exec();
+};
+
 // Cargar json de anuncios
 /* advertsSchema.statics.loadJSON = async function () {
   const file = path.join(__dirname, '../../initialAdverts.json')

@@ -12,4 +12,15 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    const advertID = req.params.id;
+
+    const advert = await Advert.getUniqueAdvert(advertID);
+    res.json({ results: advert });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
