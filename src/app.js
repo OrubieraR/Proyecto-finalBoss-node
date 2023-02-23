@@ -5,7 +5,9 @@ const login = require("./routes/login");
 const register = require("./routes/register");
 const cors = require("cors");
 require("./lib/MongooseConnection");
+
 const adverts = require("../initialAdverts");
+
 const advertsResults = require("./routes/adverts");
 
 //Configuraciones
