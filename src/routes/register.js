@@ -3,7 +3,7 @@ const express = require("express");
 const Joi = require("joi");
 const User = require("../models/User");
 const genAuthToken = require("../utils/genAuthToken");
-const emailer = require("../lib/emailer")
+const emailer = require("../lib/emailer");
 
 const router = express.Router();
 
@@ -16,25 +16,31 @@ router.post("/", async (req, res) => {
   const { error } = schema.validate(req.body);
 
   if (error) return res.status(400).send(error.details[0]);
-
+  let name = await User.findOne({ name: req.body.name });
+  if (name) {
+    return res.status(400).json({ message: "Username is already exist..." });
+  }
   let user = await User.findOne({ email: req.body.email });
-  if (user) return res.status(400).send("User already exist...");
-  user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-  });
-  emailer.sendMail(user.email, user.email)
-  //hasheamos la passS
-  const salt = await bcrypt.genSalt(9);
- user.password = await bcrypt.hash(user.password, salt);
+  if (user) {
+    return res.status(400).json({ message: "Email is already exist..." });
+  }
+  try {
+    user = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    });
+    emailer.sendMail(user);
+    const salt = await bcrypt.genSalt(9);
+    user.password = await bcrypt.hash(user.password, salt);
 
+    user = await user.save();
 
-  user = await user.save();
+    const token = genAuthToken(user);
 
-  const token = genAuthToken(user);
-
-  res.status(200).json({ token });
+    res.status(200).json({ token });
+  } catch (error) {}
+  console.log("fallo al registrar usuario")
 });
 
 module.exports = router;
