@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const advertsSchema = mongoose.Schema(
   {
     name: String,
-    company: String,
+    userOwner: String,
+    PGI: Number,
     sale: Boolean,
     price: Number,
     photo: String,
@@ -32,16 +33,19 @@ advertsSchema.statics.filterList = async function (
   return query.exec();
 };
 
+advertsSchema.statics.getUniqueAdvert = async function (advertID) {
+  const advert = Advert.findOne({ _id: advertID });
+
+  return advert.exec();
+};
+
 // Cargar json de anuncios
 /* advertsSchema.statics.loadJSON = async function () {
   const file = path.join(__dirname, '../../initialAdverts.json')
   const data = await fs.readFile(file, { encoding: 'utf-8' })
-
   if (!data) throw new Error(`${file} está vacío!`)
-
   const adverts = JSON.parse(data).adverts
   const insertedAdverts = await Advert.insertMany(adverts)
-
   return insertedAdverts
 } */
 
