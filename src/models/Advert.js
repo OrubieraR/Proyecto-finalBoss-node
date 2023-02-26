@@ -6,7 +6,7 @@ const advertsSchema = mongoose.Schema(
     userOwner: String,
     company: String,
     PGI: Number,
-    sale: Boolean,
+    sale: String,
     price: Number,
     photo: String,
     category: [String],

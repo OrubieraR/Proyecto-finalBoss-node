@@ -8,6 +8,7 @@ require("./lib/MongooseConnection");
 const fileupload = require("express-fileupload");
 const adverts = require("../initialAdverts");
 const advertsResults = require("./routes/adverts");
+const createAdvert = require("./routes/newadvert");
 
 //Configuraciones
 app.set("port", process.env.PORT || 3001);
@@ -24,8 +25,8 @@ app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/adverts", advertsResults);
 
-// Post create advert
-app.use("/api/adverts", require("./api/newadvert"));
+// Routes and post to create advert
+app.use("/api/adverts", createAdvert);
 
 // app.get("/adverts", (req,res)=>{
 //   res.send(adverts)
