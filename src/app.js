@@ -30,7 +30,7 @@ app.use("/api/register", register);
   // })
   app.use("/api/login", login);
   app.use("/api/adverts", advertsResults);
-  app.use("/api/user", userData)
+  app.use("/api/user",protect, userData)
 
 //Iniciando el servidor
 app.listen(app.get("port"), () => {

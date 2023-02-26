@@ -5,7 +5,8 @@ const router = express.Router();
 
 router.get("/", async(req, res,next)=>{
     try {
-        const user = await User.findOne(req.name)
+        const user = await User.findById(req.user._id)
+        
         if (user) {
             res.json({
               id: user._id,

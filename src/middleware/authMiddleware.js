@@ -1,4 +1,5 @@
 const { User } = require("../models");
+const jwt = require("jsonwebtoken");
 
 const protect = async (req, res, next) => {
   let token
@@ -13,11 +14,12 @@ const protect = async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
 
       // find user's obj in db and assign to req.user
-      req.user = await User.findById(decoded.id).select('-password')
-
+      req.user = await User.findById(decoded._id).select('-password')
+  
       next()
     } catch (error) {
       res.status(401)
+      console.log(error);
       throw new Error('Not authorized, invalid token')
     }
   }
