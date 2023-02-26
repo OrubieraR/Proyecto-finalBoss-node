@@ -18,7 +18,6 @@ app.set("json spaces", 2);
 app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
-app.use(fileupload());
 
 // API Route
 app.use("/api/register", register);
