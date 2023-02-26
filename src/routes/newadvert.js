@@ -25,7 +25,7 @@ const upload = require("../lib/imgStorage");
 
 // const upload = multer({ storage: storage });
 
-router.post("/", function (req, res, next) {
+router.post("/", upload.single('image'), function (req, res, next) {
   // console.log(req.body);
 
   // const advert = new Advert({
