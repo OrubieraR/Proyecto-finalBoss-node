@@ -23,4 +23,15 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const advertID = req.params.id;
+
+    await Advert.deleteAdvert(advertID);
+    res.status(201).json("Success");
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
