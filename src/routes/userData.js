@@ -19,4 +19,17 @@ router.get("/", async(req, res,next)=>{
         res.status(404)
     }
 })
+
+router.delete("/delete", async(req, res,next)=>{
+    try {
+        const user = await User.findById(req.user._id)
+        await User.deleteOne(user)
+        
+        res.status(201).json('success');
+    } catch (error) {
+        next(error)
+        res.status(404)
+    }
+})
+
 module.exports = router;
