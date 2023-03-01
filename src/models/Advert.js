@@ -39,6 +39,12 @@ advertsSchema.statics.getUniqueAdvert = async function (advertID) {
   return advert.exec();
 };
 
+advertsSchema.statics.deleteAdvert = async function (advertID) {
+  const advert = Advert.remove({ _id: advertID });
+
+  return advert.exec();
+};
+
 // Cargar json de anuncios
 /* advertsSchema.statics.loadJSON = async function () {
   const file = path.join(__dirname, '../../initialAdverts.json')
