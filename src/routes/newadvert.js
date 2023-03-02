@@ -1,9 +1,9 @@
-const express = require("express");
-const mongoose = require("mongoose");
+const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
-const Advert = require("../models/Advert");
+const Advert = require('../models/Advert');
 // const fileUpload = require("express-fileupload");
-const upload = require("../lib/imgStorage");
+const upload = require('../lib/imgStorage');
 
 // No sube las imagenes a la carpeta (code article)
 // const multer = require("multer");
@@ -25,55 +25,55 @@ const upload = require("../lib/imgStorage");
 
 // const upload = multer({ storage: storage });
 
-router.post("/", upload.single('image'), function (req, res, next) {
-  // console.log(req.body);
+router.post('/', upload.single('photo'), function (req, res, next) {
+	// console.log(req.body);
 
-  // const advert = new Advert({
-  //   category: req.body.category,
-  //   name: req.body.name,
-  //   company: req.body.company,
-  //   userOwner: req.body.user,
-  //   sale: req.body.buyorsale,
-  //   description: req.body.description,
-  //   price: req.body.price,
-  //   photo: req.body.photo,
-  // });
+	// const advert = new Advert({
+	//   category: req.body.category,
+	//   name: req.body.name,
+	//   company: req.body.company,
+	//   userOwner: req.body.user,
+	//   sale: req.body.buyorsale,
+	//   description: req.body.description,
+	//   price: req.body.price,
+	//   photo: req.body.photo,
+	// });
 
-  // const advert = new Advert(req.files, req.body);
-  const advert = new Advert(req.body);
-  // const advert = new Advert(req.files);
-  // console.log(req.files, req.body);
-  console.log(req.files);
+	// const advert = new Advert(req.files, req.body);
+	const advert = new Advert(req.body);
+	// const advert = new Advert(req.files);
+	// console.log(req.files, req.body);
+	console.log(req.body);
 
-  /*============================
+	/*============================
       Process with fileupload
   ============================*/
-  // let sampleFile;
-  // let uploadPath;
+	// let sampleFile;
+	// let uploadPath;
 
-  // if (!req.files || Object.keys(req.files).length === 0) {
-  //   return res.status(400).send("No files were uploaded.");
-  // }
+	// if (!req.files || Object.keys(req.files).length === 0) {
+	//   return res.status(400).send("No files were uploaded.");
+	// }
 
-  // // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  // sampleFile = req.files.photo;
-  // uploadPath = __dirname + "/public/img/" + sampleFile.photo;
+	// // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+	// sampleFile = req.files.photo;
+	// uploadPath = __dirname + "/public/img/" + sampleFile.photo;
 
-  // // Use the mv() method to place the file somewhere on your server
-  // sampleFile.mv(uploadPath, function (err) {
-  //   if (err) return res.status(500).send(err);
+	// // Use the mv() method to place the file somewhere on your server
+	// sampleFile.mv(uploadPath, function (err) {
+	//   if (err) return res.status(500).send(err);
 
-  //   res.send("File uploaded!");
-  // });
+	//   res.send("File uploaded!");
+	// });
 
-  // const advert = new Advert(req.body);
+	// const advert = new Advert(req.body);
 
-  advert.save(function (err, anuncioGuardado) {
-    if (err) {
-      return next(err);
-    }
-    res.json({ ok: true, advert: anuncioGuardado });
-  });
+	advert.save(function (err, anuncioGuardado) {
+		if (err) {
+			return next(err);
+		}
+		res.json({ ok: true, advert: anuncioGuardado });
+	});
 });
 
 module.exports = router;
