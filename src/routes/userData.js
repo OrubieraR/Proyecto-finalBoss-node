@@ -28,7 +28,7 @@ router.delete("/delete", async(req, res,next)=>{
         res.status(201).json('success');
     } catch (error) {
         next(error)
-        res.status(404)
+        res.status(404).json(error)
     }
 })
 
