@@ -4,8 +4,9 @@ const advertsSchema = mongoose.Schema(
   {
     name: String,
     userOwner: String,
+    company: String,
     PGI: Number,
-    sale: Boolean,
+    sale: String,
     price: Number,
     photo: String,
     category: [String],
