@@ -3,6 +3,8 @@ const app = express();
 const morgan = require("morgan");
 const login = require("./routes/login");
 const register = require("./routes/register");
+const passwordReset = require("./routes/passwordReset")
+const passwordChange = require("./routes/passwordChange")
 const cors = require("cors");
 require("./lib/MongooseConnection");
 
@@ -23,7 +25,8 @@ app.use(express.json());
 app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/adverts", advertsResults);
-
+app.use("/api/requestPasswordReset",passwordReset)
+app.use("/api/passwordChange",passwordChange)
 //Iniciando el servidor
 app.listen(app.get("port"), () => {
   console.log(`Server listening on port ${app.get("port")}`);
