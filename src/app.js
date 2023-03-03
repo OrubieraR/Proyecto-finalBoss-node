@@ -12,10 +12,6 @@ const createAdvert = require('./routes/newadvert');
 
 const protect = require('./middleware/authMiddleware');
 const router = require('./routes/register');
-
-const adverts = require('../initialAdverts');
-
-const advertsResults = require('./routes/adverts');
 const userData = require('./routes/userData');
 //Configuraciones
 app.set('port', process.env.PORT || 3001);
