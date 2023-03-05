@@ -4,8 +4,9 @@ const advertsSchema = mongoose.Schema(
   {
     name: String,
     userOwner: String,
+    company: String,
     PGI: Number,
-    sale: Boolean,
+    sale: String,
     price: Number,
     photo: String,
     category: [String],
@@ -35,6 +36,12 @@ advertsSchema.statics.filterList = async function (
 
 advertsSchema.statics.getUniqueAdvert = async function (advertID) {
   const advert = Advert.findOne({ _id: advertID });
+
+  return advert.exec();
+};
+
+advertsSchema.statics.deleteAdvert = async function (advertID) {
+  const advert = Advert.remove({ _id: advertID });
 
   return advert.exec();
 };
