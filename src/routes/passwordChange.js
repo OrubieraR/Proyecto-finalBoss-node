@@ -26,7 +26,7 @@ router.put("/", async (req, res) => {
         })
         .then(() => {
           console.log("password updated");
-          return res.status(200).send({ message: "Password updated" });
+          return res.status(200).json('success');
         });
     }
   } catch (error) {
