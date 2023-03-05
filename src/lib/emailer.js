@@ -584,8 +584,7 @@ const sendMail = async (user) => {
                                     <br />Gracias por registrarte con
                                     nosotros, tus credenciales son las
                                     siguientes:<br /><br />Usuario:
-                                    ${user.name}.<br />Em@il: ${user.email}<br />Contraseña:
-                                    ${user.password}<br /><br />Esperamos que
+                                    ${user.name}.<br />Em@il: ${user.email}<br /><br />Esperamos que
                                     disfrutes de tus compras.
                                   </p>
                                 </td>

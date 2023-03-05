@@ -16,12 +16,10 @@ router.put("/", async (req, res) => {
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     let user = await User.findOne({ email: req.body.email });
-    console.log(user);
     if (user !== null) {
       console.log("User exists in db");
       user.password = req.body.password;
       user.password = await User.hashPwd(user.password);
-      console.log(user);
       user
         .update({
           password: user.password,
