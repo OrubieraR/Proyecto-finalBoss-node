@@ -5,7 +5,6 @@ const login = require('./routes/login');
 const register = require('./routes/register');
 const cors = require('cors');
 require('./lib/MongooseConnection');
-// const fileupload = require("express-fileupload");
 const adverts = require('../initialAdverts');
 const advertsResults = require('./routes/adverts');
 const createAdvert = require('./routes/newadvert');
@@ -25,9 +24,6 @@ app.use(express.json());
 // API Route
 app.use('/api/register', register);
 
-// app.get("/adverts", (req,res)=>{
-//   res.send(adverts)
-// })
 app.use('/api/login', login);
 app.use('/api/adverts', advertsResults);
 app.use('/api/user', protect, userData);
@@ -35,9 +31,7 @@ app.use('/api/user', protect, userData);
 // Routes and post to create advert
 app.use('/api/adverts', createAdvert);
 
-// app.get("/adverts", (req,res)=>{
-//   res.send(adverts)
-// })
+app.use('/public/', express.static('./public/img/'));
 
 //Iniciando el servidor
 app.listen(app.get('port'), () => {
