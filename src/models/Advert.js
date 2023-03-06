@@ -1,49 +1,49 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const advertsSchema = mongoose.Schema(
-  {
-    name: String,
-    userOwner: String,
-    company: String,
-    PGI: Number,
-    sale: String,
-    price: Number,
-    photo: String,
-    category: [String],
-    description: String,
-  },
-  {
-    collection: "Advert",
-  }
+	{
+		name: String,
+		userOwner: String,
+		company: String,
+		PGI: Number,
+		sale: String,
+		price: Number,
+		photo: String,
+		category: [String],
+		description: String,
+	},
+	{
+		collection: 'Advert',
+	}
 );
 
 advertsSchema.statics.filterList = async function (
-  filter,
-  skip,
-  limit,
-  select,
-  sort
+	filter,
+	skip,
+	limit,
+	select,
+	sort
 ) {
-  const query = Advert.find(filter);
+	const query = Advert.find(filter);
 
-  query.skip(parseInt(skip));
-  query.limit(parseInt(limit));
-  query.select(select);
-  query.sort(sort);
+	query.skip(parseInt(skip));
+	query.limit(parseInt(limit));
+	query.select(select);
+	query.sort(sort);
 
-  return query.exec();
+	return query.exec();
 };
 
 advertsSchema.statics.getUniqueAdvert = async function (advertID) {
-  const advert = Advert.findOne({ _id: advertID });
+	const advert = Advert.findOne({ _id: advertID });
 
-  return advert.exec();
+	return advert.exec();
 };
 
 advertsSchema.statics.deleteAdvert = async function (advertID) {
-  const advert = Advert.remove({ _id: advertID });
+	const advert = Advert.remove({ _id: advertID });
 
-  return advert.exec();
+	return advert.exec();
 };
 
 // Cargar json de anuncios
@@ -56,6 +56,6 @@ advertsSchema.statics.deleteAdvert = async function (advertID) {
   return insertedAdverts
 } */
 
-const Advert = mongoose.model("Advert", advertsSchema);
+const Advert = mongoose.model('Advert', advertsSchema);
 
 module.exports = Advert;
