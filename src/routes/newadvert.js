@@ -7,7 +7,9 @@ const upload = require('../lib/imgStorage');
 router.post('/', upload.single('photo'), function (req, res, next) {
 	const advert = new Advert(req.body);
 
-	advert.photo = req.file.filename;
+	// What if req.file is not provided because there is no image uploaded in form.
+	// advert.photo = req.file.filename;
+	advert.photo = req.file ? req.file.filename : 'default.png';
 	console.log(req.file);
 
 	advert.save(function (err, anuncioGuardado) {
