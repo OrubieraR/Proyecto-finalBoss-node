@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const { array } = require("joi");
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
@@ -8,21 +9,34 @@ const userSchema = new mongoose.Schema(
       unique: true,
       required: true,
       minlength: 3,
-      maxlength: 50
+      maxlength: 50,
     },
     email: {
       type: String,
       unique: true,
       required: true,
       minlength: 3,
-      maxlength: 200
+      maxlength: 200,
     },
     password: {
       type: String,
       required: true,
       minlength: 3,
-      maxlength: 1024
+      maxlength: 1024,
     },
+    favAdverts: [
+      {
+        _id: mongoose.Types.ObjectId,
+        name: String,
+        userOwner: String,
+        PGI: Number,
+        sale: String,
+        price: Number,
+        photo: String,
+        category: [String],
+        description: String,
+      },
+    ],
   },
   {
     collection: "User",
