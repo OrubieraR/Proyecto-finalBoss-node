@@ -9,12 +9,13 @@ const passwordChange = require('./routes/passwordChange');
 const adverts = require('../initialAdverts');
 const advertsResults = require('./routes/adverts');
 const createAdvert = require('./routes/newadvert');
-const http = require('http').Server(app);
+
 require('./lib/MongooseConnection');
+require('./lib/SocketIOConnection')
 
 const protect = require('./middleware/authMiddleware');
 const userData = require('./routes/userData');
-const PORT = 4000;
+
 //Configuraciones
 app.set('port', process.env.PORT || 3000);
 app.set('json spaces', 2);
@@ -24,24 +25,6 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
-const socketIO = require('socket.io')(http, {
-    cors: {
-        origin: "http://localhost:3001"
-    }
-});
-
-socketIO.on('connection', (socket) => {
-    console.log(`⚡: ${socket.id} user just connected!`);
-
-	//sends the message to all the users on the server
-	socket.on('message', (data) => {
-		console.log(data);
-		socketIO.emit('messageResponse', data);
-	  });
-    socket.on('disconnect', () => {
-      console.log('🔥: A user disconnected');
-    });
-});
 
 // API Route
 
@@ -67,6 +50,3 @@ app.listen(app.get('port'), () => {
 	console.log(`Server listening on port ${app.get('port')}`);
 });
 
-http.listen(PORT, () => {
-	console.log(`Socket listening on ${PORT}`);
-  });
