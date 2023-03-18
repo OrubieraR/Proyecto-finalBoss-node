@@ -4,11 +4,12 @@ const router = express.Router();
 const Advert = require('../models/Advert');
 const upload = require('../lib/imgStorage');
 
-router.post('/', upload.single('photo'), function (req, res, next) {
+router.post('/', upload.single('photo[]'), function (req, res, next) {
 	const advert = new Advert(req.body);
-
-	advert.photo = req.file.filename;
 	console.log(req.file);
+	// What if req.file is not provided because there is no image uploaded in form.
+
+	advert.photo = req.file ? req.file.filename : 'default.png';
 
 	advert.save(function (err, anuncioGuardado) {
 		if (err) {

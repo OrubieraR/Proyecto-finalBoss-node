@@ -32,4 +32,18 @@ router.delete("/delete", async(req, res,next)=>{
     }
 })
 
+router.put("/:id", async (req, res) => {
+    try {
+      console.log(req.body);
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: req.params.id },
+        { $set: { favAdverts: req.body } },
+        { returnOriginal: false }
+      );
+      res.json(updatedUser);
+    } catch (error) {
+      res.status(404).json(error);
+    }
+  });
+
 module.exports = router;
