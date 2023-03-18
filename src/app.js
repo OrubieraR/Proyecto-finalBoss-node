@@ -16,7 +16,7 @@ const protect = require('./middleware/authMiddleware');
 const userData = require('./routes/userData');
 
 //Configuraciones
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3000);
 app.set('json spaces', 2);
 
 //Middleware
@@ -41,7 +41,7 @@ app.use('/api/user', protect, userData);
 // Create Adverts
 app.use('/api/adverts', createAdvert);
 
-app.use('/public/', express.static('./public/img/'));
+app.use('/api/public/', express.static('./public/img/'));
 
 //Iniciando el servidor
 app.listen(app.get('port'), () => {
