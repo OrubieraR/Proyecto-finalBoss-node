@@ -11,6 +11,7 @@ const advertsResults = require('./routes/adverts');
 const createAdvert = require('./routes/newadvert');
 
 require('./lib/MongooseConnection');
+require('./lib/SocketIOConnection')
 
 const protect = require('./middleware/authMiddleware');
 const userData = require('./routes/userData');
@@ -23,6 +24,7 @@ app.set('json spaces', 2);
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
+
 
 // API Route
 
@@ -41,9 +43,10 @@ app.use('/api/user', protect, userData);
 // Create Adverts
 app.use('/api/adverts', createAdvert);
 
-app.use('/public/', express.static('./public/img/'));
+app.use('/api/public/', express.static('./public/img/'));
 
 //Iniciando el servidor
 app.listen(app.get('port'), () => {
 	console.log(`Server listening on port ${app.get('port')}`);
 });
+
