@@ -1,4 +1,3 @@
-const bcrypt = require("bcrypt");
 const express = require("express");
 const Joi = require("joi");
 const User = require("../models/User");
@@ -30,17 +29,19 @@ router.post("/", async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-    emailer.sendMail(user);
-    const salt = await bcrypt.genSalt(9);
-    user.password = await bcrypt.hash(user.password, salt);
-
+    user.password = await User.hashPwd(user.password);
+    console.log('esto es user',user) 
     user = await user.save();
-
     const token = genAuthToken(user);
+    emailer.sendMail(user);
+    
+    return res.status(201).json({ token });
 
-    res.status(200).json({ token });
+
   } catch (error) {}
-  console.log("fallo al registrar usuario")
+  console.log("MI CODIGO SIEMPRE FUNCIONA");
+  return res.status(404).json("User not registered")
+
 });
 
 module.exports = router;

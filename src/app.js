@@ -1,17 +1,20 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const cors = require('cors');
 const login = require('./routes/login');
 const register = require('./routes/register');
-const cors = require('cors');
-require('./lib/MongooseConnection');
+const passwordReset = require('./routes/passwordReset');
+const passwordChange = require('./routes/passwordChange');
 const adverts = require('../initialAdverts');
 const advertsResults = require('./routes/adverts');
 const createAdvert = require('./routes/newadvert');
 
+require('./lib/MongooseConnection');
+
 const protect = require('./middleware/authMiddleware');
-const router = require('./routes/register');
 const userData = require('./routes/userData');
+
 //Configuraciones
 app.set('port', process.env.PORT || 3000);
 app.set('json spaces', 2);
@@ -22,13 +25,20 @@ app.use(cors());
 app.use(express.json());
 
 // API Route
+
+// Register
 app.use('/api/register', register);
-
+//Login
 app.use('/api/login', login);
+// GET all adverts
 app.use('/api/adverts', advertsResults);
+//Password Reset Email
+app.use('/api/requestPasswordReset', passwordReset);
+//Password Change Email
+app.use('/api/passwordChange', passwordChange);
+//Profile Data
 app.use('/api/user', protect, userData);
-
-// Routes and post to create advert
+// Create Adverts
 app.use('/api/adverts', createAdvert);
 
 app.use('/public/', express.static('./public/img/'));

@@ -1,36 +1,35 @@
-const {User} = require("../models/User")
-const genAuthToken = require ("../utils/genAuthToken")
-const sendMail  = require("../lib/emailer")
-const joi = require("joi")
-const express = require("express")
-const router = express.Router()
-const emailer = require("../lib/emailer")
+const User = require("../models/User");
+const genAuthToken = require("../utils/genAuthToken");
+const sendMail = require("../lib/emailer");
+const Joi = require("joi");
+const express = require("express");
+const emailer = require("../lib/emailer");
+const dotenv = require("dotenv")
+dotenv.config();
 
-router.post("/", async (req,res)=>{
+const url = process.env.FRONT_URL
 
-try {
-  const schema = Joi.object({ email: Joi.string().email().required() });
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-  const user = await User.findOne({ email: req.body.email });
-  if (!user)
-  return res.status(400).json({ message: "Email is already exist..." });
+const router = express.Router();
+router.post("/", async (req, res) => {
+  try {
+    const schema = Joi.object({
+      email: Joi.string().min(3).max(200).required().email(),
+    });
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) return res.status(400).json({ message: "Email don't exist..." });
 
-  let token = genAuthToken(user).save()
+    let token = genAuthToken(user)
 
-const link = `${clientURL}/passwordReset?token=${resetToken}&id=${user._id}`
+    const link = `${url}/passwordReset?token=${token}&email=${user.email}`;
+    emailer.sendResetMail(user, link); 
+    
+    return 
+  } catch (error) {
+    res.send("An error occured");
+    console.log(error);
+  }
+});
+module.exports = router;
 
-emailer.sendResetMail()
-
-
-
-
-}catch(error){
-  res.send("An error occured");
-        console.log(error);
-}
-
-
-
-
-})
