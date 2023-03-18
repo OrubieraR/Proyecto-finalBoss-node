@@ -16,7 +16,7 @@ const protect = require('./middleware/authMiddleware');
 const userData = require('./routes/userData');
 
 //Configuraciones
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3000);
 app.set('json spaces', 2);
 
 //Middleware
