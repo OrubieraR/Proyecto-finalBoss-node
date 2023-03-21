@@ -12,6 +12,18 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// PENDIENTE DE TRAER LOS TAGS DESDE BACK
+// router.get("/categories", async (req, res, next) => {
+//   try {
+//     const adverts = await Advert.filterList();
+
+//     console.log(adverts.category)
+//     res.json({ results: adverts.category });
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 router.get("/:id", async (req, res, next) => {
   try {
     const advertID = req.params.id;
@@ -22,6 +34,19 @@ router.get("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
+router.get("/user/:name", async (req, res, next) => {
+  try {
+    const name = req.params.userOwner;
+
+    const adverts = await Advert.find({ userOwner: name });
+    res.json({ results: adverts });
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 
 router.delete("/:id", async (req, res, next) => {
   try {
