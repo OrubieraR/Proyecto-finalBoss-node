@@ -46,6 +46,11 @@ advertsSchema.statics.deleteAdvert = async function (advertID) {
 	return advert.exec();
 };
 
+advertsSchema.statics.getUserAdvert = async function (userOwner) {
+	const advert = Advert.find({ userOwner: userOwner });
+	return advert.exec();
+};
+
 // Cargar json de anuncios
 /* advertsSchema.statics.loadJSON = async function () {
   const file = path.join(__dirname, '../../initialAdverts.json')

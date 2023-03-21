@@ -9,6 +9,7 @@ const passwordChange = require('./routes/passwordChange');
 const adverts = require('../initialAdverts');
 const advertsResults = require('./routes/adverts');
 const createAdvert = require('./routes/newadvert');
+const userAdverts = require('./routes/userAdverts');
 
 require('./lib/MongooseConnection');
 
@@ -42,6 +43,9 @@ app.use('/api/user', protect, userData);
 app.use('/api/adverts', createAdvert);
 
 app.use('/public/', express.static('./public/img/'));
+
+// Adverts of specific user
+app.use('/api/adverts', userAdverts);
 
 //Iniciando el servidor
 app.listen(app.get('port'), () => {
