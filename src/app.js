@@ -9,6 +9,7 @@ const passwordChange = require('./routes/passwordChange');
 const adverts = require('../initialAdverts');
 const advertsResults = require('./routes/adverts');
 const createAdvert = require('./routes/newadvert');
+const contactMe = require('./routes/contactMe')
 
 require('./lib/MongooseConnection');
 require('./lib/SocketIOConnection')
@@ -42,6 +43,8 @@ app.use('/api/passwordChange', passwordChange);
 app.use('/api/user', protect, userData);
 // Create Adverts
 app.use('/api/adverts', createAdvert);
+// Email Contact
+app.use('/api/contactEmail', contactMe);
 
 app.use('/api/public/', express.static('./public/img/'));
 
